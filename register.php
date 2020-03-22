@@ -91,8 +91,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate password
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter a password.";     
-    } elseif(strlen(trim($_POST["password"])) < 6){
-        $password_err = "Password must have atleast 6 characters.";
+    } elseif(strlen(trim($_POST["password"])) < 8){
+        $password_err = "Password must contain at least eight characters.";
+    } elseif(!preg_match('~[0-9]~', trim($_POST["password"]))){
+        $password_err = "Password must contain at least one number.";
+    } elseif(!preg_match('/[\'^£$%&*()}{@#~?!><>,|=_+¬-]/', trim($_POST["password"]))){
+        $password_err = "Password must contain at least one special character.";
+    } elseif(!preg_match('/[A-Z]/', trim($_POST["password"]))){
+        $password_err = "Password must contain at least one uppercase letter.";
+    } elseif(!preg_match('/[a-z]/', trim($_POST["password"]))){
+        $password_err = "Password must contain at least one lowercase letter.";
     } else{
         $password = trim($_POST["password"]);
     }
@@ -176,6 +184,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Confirm Password</label>
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
+                <label for="specification">For passwords, please include the following: <br>
+                * At least 8 characters.<br>
+                * At least one number.<br>
+                * At least one special character.<br>
+                * At least one uppercase and one lowercase letter.</label>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
