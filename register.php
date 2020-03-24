@@ -3,8 +3,8 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = $email = "";
-$username_err = $password_err = $confirm_password_err = $email_err = "";
+$username = $password = $confirm_password = $email = $school = "";
+$username_err = $password_err = $confirm_password_err = $email_err = $school_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -114,9 +114,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $confirm_password_err = "Password did not match.";
         }
     }
+
+    // Make sure a school was selected
+    if($_POST["campus"] == "select") {
+        $school_err = "Please select a school.";
+    } else {
+        $school = $_POST["campus"];
+    }
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err) && empty($school_err)){
         
         // Prepare an insert statement
         $sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
@@ -170,7 +177,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-                <!--Ask for email here -->
                 <label>Email Address</label>
                 <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
                 <span class="help-block"><?php echo $email_err; ?></span>
@@ -189,6 +195,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 * At least one number.<br>
                 * At least one special character.<br>
                 * At least one uppercase and one lowercase letter.</label>
+            </div>
+            <div class="form-group <?php echo (!empty($school_err)) ? 'has-error' : ''; ?>">
+                <label for="campus">Select Your Campus</label>
+                    <span class="help-block"><?php echo $school_err; ?></span>
+                    <select name="campus" id="campus">
+                        <option value="select">Select</option>
+                        <option value="csuf">California State University, Fullerton</option>
+                        <option value="csula">California State University, Los Angeles</option>
+                        <option value="csulb">California State University, Long Beach</option>
+                        <option value="cpp">Cal Poly Pomona</option>
+                        <option value="fullcoll">Fullerton College</option>
+                        <option value="occ">Orange County College</option>
+                        <option value="uci">University of California, Irvine</option>
+                        <option value="ucr">University of California, Riverside</option>
+                    </select>
+            </div>
+            <div>
+                <h4>Select Your Icon</h4>
+                <label class="avatar">
+                    <input type="radio" name="avatar" checked>
+                    <img src="img/avatar1.png" alt="avatar1">
+                </label>
+                <label class="avatar">
+                    <input type="radio" name="avatar">
+                    <img src="img/avatar2.png" alt="avatar2">
+                </label>
+                <label class="avatar">
+                    <input type="radio" name="avatar">
+                    <img src="img/avatar3.png" alt="avatar3">
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
