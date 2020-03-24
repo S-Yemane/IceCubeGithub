@@ -1,0 +1,146 @@
+input[type=text]{
+    padding:5px;
+    border: 3px solid lightsalmon;
+    border-radius: 5px;
+    width: 320px;
+    height: 40px;
+}
+
+input[type=password]{
+    padding:5px;
+    border: 3px solid lightsalmon;
+    border-radius: 5px;
+    width: 320px;
+    height: 40px;
+}
+
+.right {
+    float: right;
+    flex-flow: row;
+    height:90px;
+    width: 500px;
+    border: 3px;
+    padding: 60px 0;
+  }
+
+  .left {
+    position: absolute;
+    float: left;
+    border: 3px;
+    padding: 60px 135px;
+  }
+
+  .center {
+    margin: auto;
+    width:30%;
+    border: 3px;
+    padding: 10px;
+    display:block;
+  }
+  
+body{
+    margin: 0px;
+    padding: 0px;
+    background-image: url(..//img/college1.jpg);
+    animation: initial;
+  }
+nav{
+  width:100%;
+  background-color: lavender;
+  overflow:hidden;
+}
+
+ul{
+  padding:0;
+  margin: 0 0 0 150px;
+  list-style: none;
+}
+
+li{
+  float: right;
+}
+
+.logo img{
+  position: absolute;
+  height: 80;
+  width: 300;
+}
+
+  .container{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    animation: animate 16s ease-in-out infinite;
+    background-size: cover;
+  }
+
+  .outer{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.5)
+  }
+
+  .details{
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .details h1{
+    font-size: 4em;
+    color: #fff;
+  }
+
+  .details h2{
+    text-transform: capitalize;
+    color: #fff;
+  }
+
+  .details h2 span:nth-child(1){
+    color: red;
+  }
+
+  .details h2 span:nth-child(2){
+    color: yellow;
+  }
+
+
+  @keyframes animate{
+    0%,100%{
+      background-image: url(../img/college1.jpg);
+    }
+    25%{
+      background-image: url(../img/college2.jpg);
+    }
+    50%{
+      background-image: url(../img/college3.jpg);
+    }
+    75%{
+      background-image: url(../img/college4.jpg);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .avatars > input{
+    display: none;
+  }
+  
+  .avatars > input + img{
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  
+  .avatars > input:checked + img{
+    border: 2px solid red;
+  }
+
