@@ -244,15 +244,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <h4 style="color:white;">Select your icon:</h4>
                     <span class="help-block"><?php echo $avatar_err; ?></span>
                     <label class="avatar">
-                        <input type="radio" name="avatar">
+                        <input type="radio" name="avatar" value="avatar1">
                         <img src="img/avatar1.png" alt="avatar1">
                     </label>
                     <label class="avatar">
-                        <input type="radio" name="avatar">
+                        <input type="radio" name="avatar" value="avatar2">
                         <img src="img/avatar2.png" alt="avatar2">
                     </label>
                     <label class="avatar">
-                        <input type="radio" name="avatar">
+                        <input type="radio" name="avatar" value="avatar3">
                         <img src="img/avatar3.png" alt="avatar3">
                     </label>
                 </div>
