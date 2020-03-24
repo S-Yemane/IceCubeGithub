@@ -3,7 +3,7 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = $email = $school = "";
+$username = $password = $confirm_password = $email = $school = $avatar = "";
 $username_err = $password_err = $confirm_password_err = $email_err = $school_err = "";
  
 // Processing form data when form is submitted
@@ -121,21 +121,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else {
         $school = $_POST["campus"];
     }
+
+    // Grab the selected avatar
+    $avatar = $_POST["avatar"];
     
     // Check input errors before inserting in database
     if(empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err) && empty($school_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (username, password, email, school, avatar) VALUES (?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_email);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_email, $param_school, $param_avatar);
             
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_email = $email;
+            $param_school = $school;
+            $param_avatar = $avatar;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -214,15 +219,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div>
                 <h4>Select Your Icon</h4>
                 <label class="avatar">
-                    <input type="radio" name="avatar" checked>
+                    <input type="radio" name="avatar" value="avatar1" checked>
                     <img src="img/avatar1.png" alt="avatar1">
                 </label>
                 <label class="avatar">
-                    <input type="radio" name="avatar">
+                    <input type="radio" name="avatar" value="avatar2">
                     <img src="img/avatar2.png" alt="avatar2">
                 </label>
                 <label class="avatar">
-                    <input type="radio" name="avatar">
+                    <input type="radio" name="avatar" value="avatar3">
                     <img src="img/avatar3.png" alt="avatar3">
                 </label>
             </div>
