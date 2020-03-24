@@ -10,10 +10,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     //if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-        $userID = 5;
+        //$userID = $_SESSION["id"];
     //} else {
         //header("location: login.php");
     //}
+    $userID = 5;
 
     if (!empty($message)) {
         $sql = "INSERT INTO posts (message, school, userID) VALUES (?, ?, ?)";
